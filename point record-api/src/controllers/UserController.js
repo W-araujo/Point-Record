@@ -1,13 +1,10 @@
 const UserService = require("../services/UserService")
-const md5 = require("md5")
 
 class UserController {
 
     async create(req, res) {
         try {
-            const { name, email, password, role } = req.body
-            const encrypted = md5(password)
-            await UserService.create({ name: name, email: email, password: encrypted, role: role })
+            await UserService.create(req.body)
             return res.status(200).json({ message: "Registered successfully" })
         } catch (error) {
             console.log(error)
