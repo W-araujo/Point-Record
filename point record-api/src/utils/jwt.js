@@ -3,7 +3,6 @@ const JWT = require('jsonwebtoken')
 const jwtKey = process.env.JWT_KEY
 
 const tokenGenerator = (user) => {
-
     return JWT.sign({
         id: user.id,
         email: user.email,
