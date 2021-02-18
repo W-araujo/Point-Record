@@ -1,10 +1,30 @@
 const User = require('../models/User')
-const md5 = require("md5")
+
+const { encryptPassword, comparePassword } = require('../utils/password')
+const { tokenGenerator } = require('../utils/jwt')
+
 
 class UserService {
 
     async create(data) {
-        return User.create({ name: data.name, email: data.email, password: md5(data.password), role: data.role })
+        return User.create({
+            name: data.name, email: data.email, password: encryptPassword(data.password), role: data.role
+        })
+    }
+
+    async login(data) {
+
+        const { password: passwordEncrypted, ...user } = await User.getByEmail(data.email)
+
+        const isTrue = comparePassword(data.password, passwordEncrypted)
+        
+        if (!isTrue) {
+            throw new Error('Password is not equal')
+        }
+
+        const token = tokenGenerator(user)
+
+        return { token, user }
     }
 
 }
