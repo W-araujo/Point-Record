@@ -5,6 +5,7 @@ const knex = require("knex")(development)
 const BaseModel = require("./Base")
 
 class User extends BaseModel {
+
     constructor() {
         super('user')
     }
@@ -12,6 +13,7 @@ class User extends BaseModel {
     async getByEmail(email) {
         const user = await knex('user')
             .where('email', email)
+            .andWhere({ is_deleted: false })
             .select('user.email', 'user.password', 'user.id', 'user.name', 'user.role')
             .first()
 
@@ -20,6 +22,7 @@ class User extends BaseModel {
         }
         return user
     }
+    
 }
 
 module.exports = new User()
