@@ -1,0 +1,44 @@
+.logon-container html, body {
+    background: #333333;
+    font-family: Montserrat;
+    color: white;
+}
+
+.logon-container h1 {
+    font-size: 60px;
+}
+
+.logon-container p {
+    font-size: 23px;
+    color: #39E991;
+    line-height: 126.4%;
+    letter-spacing: 0.43em;
+}
+
+
+.logon-container button {
+    min-width: 40%;
+    background-color: #219653;
+    font-weight: bold;
+    border-color: #219653;
+}
+
+.logon-container button:hover{
+background: #2ba35f;
+border-color: #2ba35f;
+}
+
+
+.logon-container label {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.logon-container .form-area {
+    margin: auto;
+    width: 450px;
+    height: 400px;
+    background-Color: white;
+    border-radius: 40px;
+    color: black;
+}
