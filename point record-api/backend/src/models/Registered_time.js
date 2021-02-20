@@ -13,6 +13,7 @@ class Registered_Time {
             .join('user', 'user.id', '=', 'registered_time.user_id')
             .where('user.id', id)
             .select([
+                'registered_time.id',
                 'user.name',
                 'registered_time.time_registered'
             ])

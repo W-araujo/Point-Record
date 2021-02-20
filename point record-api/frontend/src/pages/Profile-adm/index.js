@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect, useHistory } from 'react-router-dom'
 
 import api from '../../api/api'
 
 import Logo from '../../assets/logo.png'
 import Dashboard from '../../assets/vector1.png'
 import Register from '../../assets/register.png'
+import Exit from '../../assets/exit.png'
 
 import './styles.css'
 
 
 export default function ProfileADM() {
+    
+    const [administrators, setEmproyess] = useState([])
 
-    const [employees, setEmproyess] = useState([])
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJyb2RAZ21haWwuY29tIiwicm9sZSI6ImFkbSIsImlhdCI6MTYxMzc5NTgxMiwiZXhwIjoxNjEzNzk5NDEyfQ.ULMIhStKLADXKmBPQlM03PalRrXcGNRMhMoEcbqWO1s"
+    const history = useHistory()
 
-    const ids = employees.map(emp => {
-        return emp.id
-    })
+    const token = localStorage.getItem('token')
 
     useEffect(() => {
         api.get('/registered_time/list_all', { headers: { token: token } }).then(res => {
             setEmproyess(res.data);
         })
-    }, [ids]);
+    });
+
+
+    function logout() {
+        localStorage.clear();
+        history.push('/');
+    }
 
     return (
         <div className="profileADM-container">
@@ -33,19 +39,27 @@ export default function ProfileADM() {
 
             <nav>
                 <ul>
-                    <li><img src={Logo} width="55" height="55" alt="" /></li>
+                    <li>
+                        <img src={Logo} width="55" height="55" alt="" />
+                    </li>
                     <hr style={{ marginRight: 25 }} />
-                    <a href="/">
-                        <li><img src={Dashboard} style={{ marginLeft: 7, color: '#A5A5A5' }} width="45" height="45" alt="" />
-                            <h6 style={{ color: '#A5A5A5', marginTop:10 }}>Dashboard</h6>
-                        </li>
-                    </a>
+                    <li>
+                        <Link to="/registered_time/list_all">
+                            <img src={Dashboard} style={{ marginLeft: 7, color: '#A5A5A5' }} width="45" height="45" alt="" />
+                            <h6 style={{ color: '#A5A5A5', marginTop: 10 }}>Dashboard</h6>
+                        </Link>
+                    </li>
                     <hr style={{ marginRight: 25 }} />
-                    <a href="/" >
-                        <li><img src={Register} style={{ marginLeft: 13, }} width="36" height="36" alt="" />
-                            <br />   <h6 style={{ color: '#A5A5A5', marginTop:10 }}>Meus Registros</h6>
+                    <li><img src={Register} style={{ marginLeft: 13 }} width="36" height="36" alt="" />
+                        <br />   <h6 style={{ color: '#A5A5A5', marginTop: 10 }}>Meus Registros</h6>
+                    </li>
+
+                    <hr style={{ marginRight: 25 }} />
+                    <Link onClick={logout} to="/">
+                        <li style={{ color: '#A5A5A5' }}>
+                            <img src={Exit} style={{ marginLeft: 13, marginTop: 320 }} width="34" height="34" alt="" />
                         </li>
-                    </a>
+                    </Link>
                 </ul>
             </nav>
 
@@ -64,14 +78,14 @@ export default function ProfileADM() {
 
                 <form>
                     <ul>
-                        {employees.map(employee => (
-                            <li key={employee.id}>
+                        {administrators.map(adm => (
+                            <li key={adm.id}>
                                 <article class="second">
                                     <div class="item4">
-                                        <p>{employee.name} </p>
+                                        <p>{adm.name} </p>
                                     </div>
                                     <div class="item5">
-                                        <p>{employee.time_registered}</p>
+                                        <p>{adm.time_registered}</p>
                                     </div>
                                     <div class="item6">
                                         <p>09:05</p>

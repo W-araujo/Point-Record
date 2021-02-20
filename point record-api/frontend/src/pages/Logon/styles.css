@@ -46,14 +46,14 @@ label {
     line-height: 22px;
 }
 
-.btn {
+.button-logon {
     background-color: #219653;
     min-width: 115px;
     font-weight: bold;
     font-size: 24px;
 }
 
-.btn:hover {
+.button-logon:hover {
     background: #2ba35f;
     border-color: #2ba35f;
 }
