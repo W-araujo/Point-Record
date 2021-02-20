@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory, Redirect } from 'react-router-dom'
 
 import api from '../../api/api'
 
@@ -21,6 +21,11 @@ export default function Logon() {
         try {
             const res = await api.post('user/session', { email, password });
 
+            localStorage.setItem('name', res.data.user.name)
+            localStorage.setItem('id', res.data.user.id)
+            localStorage.setItem('token', res.data.token)
+
+
             if (res.data.user.role === 'emp') {
                 history.push('/registered_time/get_list');
             } else if (res.data.user.role === 'adm') {
@@ -29,7 +34,6 @@ export default function Logon() {
                 alert('Authentication failure');
             }
 
-            console.log(res.data.token);
 
         } catch (err) {
             alert('Authentication failure');
@@ -82,7 +86,7 @@ export default function Logon() {
                                             id="examplePassword"
                                             placeholder="Inform your password" />
                                     </FormGroup>
-                                    <Button type="submit">Login</Button>
+                                    <Button className="button-logon" type="submit">Login</Button>
                                 </Form>
                             </div>
                         </div>

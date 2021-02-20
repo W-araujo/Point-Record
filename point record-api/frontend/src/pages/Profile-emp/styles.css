@@ -1,0 +1,121 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+}
+
+h3 {
+    color: black
+}
+
+.profileEMP-container {
+    display: grid;
+    grid-template-columns: 0.3fr 3fr;
+    grid-template-rows: 12vh 88vh;
+    grid-template-areas: "n h" "n m";
+}
+
+main {
+    background: #E5E5E5;
+    grid-area: m;
+    text-align: center;
+    padding: 30px;
+}
+
+header {
+    background: #E5E5E5;
+    grid-area: h;
+    text-align: center;
+    padding: 30px;
+}
+
+nav {
+    display: fixed;
+    background: white;
+    grid-area: n;
+    padding: 10px;
+}
+
+.profileEMP-container .first {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 10vh;
+    grid-template-areas: "it1 it2 it3";
+}
+
+.item1 {
+    grid-area: it1;
+    text-align: center;
+    padding: 10px;
+}
+
+.item2 {
+    grid-area: it2;
+    text-align: center;
+    padding: 10px;
+}
+
+.item3 {
+    grid-area: it3;
+    text-align: center;
+    padding: 10px;
+}
+
+.profileEMP-container .second {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 10vh;
+    grid-template-areas: "it4 it5 it6";
+}
+
+.item4 {
+    background: white;
+    grid-area: it4;
+    text-align: center;
+    padding: 25px;
+}
+
+.item5 {
+    background: white;
+    grid-area: it5;
+    text-align: center;
+    padding: 25px;
+}
+
+.item6 {
+    background: white;
+    grid-area: it6;
+    text-align: center;
+    padding: 25px;
+}
+
+form ul li {
+    list-style-type: none;
+}
+
+.profileEMP-container nav ul a {
+    text-decoration: none;
+}
+
+
+form ul li p {
+    margin-right: 45px;
+    color: black;
+    font-size: 20px;
+}
+
+.item5 p {
+    color: #888888;
+}
+
+.item6 p {
+    margin-left: 45px;
+    font-size: 27px;
+    font-weight: bold;
+    color: #888888;
+}
+
+li {
+    list-style-type: none;
+}
+
