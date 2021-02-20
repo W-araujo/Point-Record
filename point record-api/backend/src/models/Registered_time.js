@@ -23,6 +23,7 @@ class Registered_Time {
         const users = await knex('registered_time')
            .join('user', 'user.id', '=', 'registered_time.user_id')
            .select([
+               'registered_time.id',
                'user.name',
                'registered_time.time_registered'
            ])

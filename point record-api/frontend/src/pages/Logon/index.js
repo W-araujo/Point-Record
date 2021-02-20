@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+
+import api from '../../api/api'
+
 import './styles.css'
 
 import Logo from '../../assets/logo.png'
@@ -6,33 +10,81 @@ import Logo from '../../assets/logo.png'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 export default function Logon() {
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
+    const history = useHistory();
+
+    async function handleLogin(e) {
+        e.preventDefault();
+        try {
+            const res = await api.post('user/session', { email, password });
+
+            if (res.data.user.role === 'emp') {
+                history.push('/registered_time/get_list');
+            } else if (res.data.user.role === 'adm') {
+                history.push('/registered_time/list_all');
+            } else {
+                alert('Authentication failure');
+            }
+
+            console.log(res.data.token);
+
+        } catch (err) {
+            alert('Authentication failure');
+        }
+    }
+
     return (
         <div className="logon-container">
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-lg-7 row justify-content-center mt-2">
-                        <img className="img-fluid" src={Logo} alt="" />
-                      
-                        <div className="col-lg-12 row justify-content-center ">
-                            <h1>Register</h1>
+            <div className="container">
+                <div className="row mt-5">
+                    <div className="col">
+                        <div className="row">
+                            <div className="col row justify-content-center">
+                                <img class="img-fluid" src={Logo} alt="" />
+                            </div>
                         </div>
-                        <div className="col-lg-12 row justify-content-center">
-                            <p>ACCESS CONTROL</p>
+                        <div className="row">
+                            <div className="col row justify-content-center">
+                                <h1>Register</h1>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col row justify-content-center">
+                                <p>ACCESS CONTROL</p>
+                            </div>
                         </div>
                     </div>
-                    <div className="col-lg-3 " >
-                        <div className=" form-area row justify-content-center mt-5">
-                            <Form className="col-lg-10" style={{ margin: 'auto' }}>
-                                <FormGroup>
-                                    <Label for="exampleEmail">Login</Label>
-                                    <Input type="email" name="email" id="exampleEmail" style={{ backgroundColor: '#f2f2f2' }} placeholder="with a placeholder" />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="examplePassword">Senha</Label>
-                                    <Input type="password" name="password" id="examplePassword" style={{ backgroundColor: '#f2f2f2' }} placeholder="password placeholder" />
-                                </FormGroup>
-                                <Button>Login</Button>
-                            </Form>
+                    <div className="col">
+                        <div className="img-area row justify-content-center">
+                            <div className="box-area row justify-content-center">
+                                <Form onSubmit={handleLogin}>
+                                    <FormGroup>
+                                        <Label for="exampleEmail">Login</Label>
+                                        <Input
+                                            type="email"
+                                            value={email}
+                                            onChange={e => setEmail(e.target.value)}
+                                            name="email"
+                                            id="exampleEmail"
+                                            placeholder="Inform your email"
+                                        />
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Label for="examplePassword">Senha</Label>
+                                        <Input
+                                            type="password"
+                                            value={password}
+                                            onChange={e => setPassword(e.target.value)}
+                                            name="password"
+                                            id="examplePassword"
+                                            placeholder="Inform your password" />
+                                    </FormGroup>
+                                    <Button type="submit">Login</Button>
+                                </Form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -40,6 +92,7 @@ export default function Logon() {
         </div>
     )
 }
+
 
 
 

@@ -1,44 +1,59 @@
-.logon-container html, body {
+html body {
     background: #333333;
     font-family: Montserrat;
     color: white;
 }
 
-.logon-container h1 {
+h1 {
     font-size: 60px;
+    font-weight: bold;
 }
 
-.logon-container p {
+p {
     font-size: 23px;
     color: #39E991;
     line-height: 126.4%;
     letter-spacing: 0.43em;
 }
 
-
-.logon-container button {
-    min-width: 40%;
-    background-color: #219653;
-    font-weight: bold;
-    border-color: #219653;
+form {
+    color: black;
+    margin: auto;
 }
 
-.logon-container button:hover{
-background: #2ba35f;
-border-color: #2ba35f;
+.form-control {
+    background: #F2F2F2;
+    width: 320px
 }
 
+.img-area {
+    background-image: url(../../assets/Vector.svg);
+    width: 600px;
+    height: 600px;
+    border-radius: 40px;
+}
 
-.logon-container label {
+.box-area {
+    background: white;
+    width: 400px;
+    height: 300px;
+    border-radius: 40px;
+    margin: auto;
+}
+
+label {
     font-size: 18px;
     line-height: 22px;
 }
 
-.logon-container .form-area {
-    margin: auto;
-    width: 450px;
-    height: 400px;
-    background-Color: white;
-    border-radius: 40px;
-    color: black;
+.btn {
+    background-color: #219653;
+    min-width: 115px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.btn:hover {
+    background: #2ba35f;
+    border-color: #2ba35f;
 }
