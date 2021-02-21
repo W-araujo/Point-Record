@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import api from '../../api/api'
 
@@ -7,6 +7,9 @@ import Logo from '../../assets/logo.png'
 import Dashboard from '../../assets/vector1.png'
 import Register from '../../assets/register.png'
 import Exit from '../../assets/exit.png'
+
+import moment from 'moment'
+import 'moment/locale/pt-br'
 
 import './styles.css'
 
@@ -85,10 +88,10 @@ export default function ProfileADM() {
                                         <p>{adm.name} </p>
                                     </div>
                                     <div class="item5">
-                                        <p>{adm.time_registered}</p>
+                                        <p>{moment(adm.time_registered).format('DD/MM/YY')}</p>
                                     </div>
                                     <div class="item6">
-                                        <p>09:05</p>
+                                        <p>{moment(adm.time_registered).locale('pt-br').format('LT[h]')}</p>
                                     </div>
                                 </article>
                             </li>
