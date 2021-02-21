@@ -27,7 +27,7 @@ class Registered_Time {
                'registered_time.id',
                'user.name',
                'registered_time.time_registered'
-           ])
+           ]).orderBy('time_registered', 'desc')
            return users
    }
 
