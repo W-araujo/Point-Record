@@ -25,7 +25,7 @@
 </p>
 
      
-<h2>Documentação (rotas) - <a href="https://documenter.getpostman.com/view/12541520/TWDXpxVf" target="_blank">Link</a></h2>
+<h2>Documentação (rotas) - <a href="https://documenter.getpostman.com/view/12541520/TWDXpxVf" target="blank">Link</a></h2>
 
 <h1> ➡ Contents </h1>
 <ul>
