@@ -7,10 +7,10 @@ class Registered_TimeController {
                 return res.status(403).json({ message: "Unauthorizad" })
             }
             await Registered_TimeService.register(req.body, req.user.id)
-            return res.status(200).json({ message: "Registered successfully" })
+            return res.status(201).json({ message: "Registered successfully" })
         } catch (error) {
             console.log(error)
-            return res.status(403).json({ message: "Something went wrong" })
+            return res.status(400).json({ message: "Something went wrong" })
         }
     }
 
@@ -23,7 +23,7 @@ class Registered_TimeController {
             return res.status(200).json(user)
         } catch (error) {
             console.log(error)
-            return res.status(403).json({ message: "Something went wrong" })
+            return res.status(400).json({ message: "Something went wrong" })
         }
     }
 
@@ -36,7 +36,7 @@ class Registered_TimeController {
             return res.status(200).json(users)
         } catch (error) {
             console.log(error)
-            return res.status(403).json({ message: "Something went wrong" })
+            return res.status(400).json({ message: "Something went wrong" })
         }
     }
 }
