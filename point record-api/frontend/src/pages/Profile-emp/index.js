@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form } from 'reactstrap'
 import { Link, useHistory } from 'react-router-dom'
-
 import api from '../../api/api'
-
 import Logo from '../../assets/logo.png'
 import Dashboard from '../../assets/vector1.png'
 import Register from '../../assets/register.png'
 import Exit from '../../assets/exit.png'
 import moment from 'moment'
 import 'moment/locale/pt-br'
-
-
 import './styles.css'
 
 
 export default function ProfileEMP(props) {
     const [employees, setEmproyess] = useState([])
     const [time_registered, setTime_registered] = useState('')
-    const [modal, setModal] = useState(false);
+    const [modal, setModal] = useState(false)
 
     const history = useHistory()
 
@@ -26,44 +22,40 @@ export default function ProfileEMP(props) {
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-        api.get('/registered_time/get_list', { headers: { token: token } }).then(res => {
-            setEmproyess(res.data);
+        api.get('/registered_time/list/unique', { headers: { token: token } }).then(res => {
+            setEmproyess(res.data)
         })
-    });
+    })
 
     async function handleTime_registered(e) {
-        e.preventDefault();
-
+        e.preventDefault()
 
         const verifyDate = moment(time_registered, true)
-        if(verifyDate.isValid()){
-
-        const data = {
-            time_registered
+        if (verifyDate.isValid()) {
+            const data = {
+                time_registered
+            }
+            try {
+                await api.post('/registered_time/register', data, { headers: { token: token } })
+                history.push('/registered_time/list/unique')
+            } catch (error) {
+                alert('Invalid token')
+            }
+        } else {
+            alert('Invalid Date')
         }
-        try {
-            await api.post('/registered_time/register', data, { headers: { token: token } })
-            history.push('/registered_time/get_list')
-        } catch (error) {
-            alert('Invalid token')
-        }
-    }else{
-        alert('Invalid Date')
-    }
     }
 
     const {
         buttonLabel,
         className
-    } = props;
-    const toggle = () => setModal(!modal);
+    } = props
+    const toggle = () => setModal(!modal)
 
     function logout() {
-        localStorage.clear();
-        history.push('/');
+        localStorage.clear()
+        history.push('/')
     }
-
-
 
     return (
         <div className="profileEMP-container">
@@ -90,12 +82,8 @@ export default function ProfileEMP(props) {
                                 <Button type="submit" color="success" onClick={toggle}>Salvar</Button>
                                 <Button outline color="success" onClick={toggle}>Cancelar</Button>{' '}
                             </ModalFooter>
-
                         </Form>
-
-
                     </ModalBody>
-
                 </Modal>
             </header>
             <nav>
@@ -109,7 +97,7 @@ export default function ProfileEMP(props) {
                         <h6 style={{ color: '#A5A5A5', marginTop: 10 }}>Dashboard</h6>
                     </li>
                     <hr style={{ marginRight: 25 }} />
-                    <Link to="/registered_time/get_list">
+                    <Link to="/registered_time/list/unique">
                         <li><img src={Register} style={{ marginLeft: 13 }} width="36" height="36" alt="" />
                             <br />   <h6 style={{ color: '#A5A5A5', marginTop: 10 }}>Meus Registros</h6>
                         </li>
@@ -137,23 +125,21 @@ export default function ProfileEMP(props) {
                 </article>
                 <form>
                     <ul>
-                        {
-                            moment.locale(''),
-                            employees.map(employee => (
-                                <li key={employee.id}>
-                                    <article className="second">
-                                        <div className="item4">
-                                            <p>{employee.name} </p>
-                                        </div>
-                                        <div className="item5">
-                                            <p>{moment(employee.time_registered).format('DD/MM/YY')}</p>
-                                        </div>
-                                        <div className="item6">
-                                            <p>{moment(employee.time_registered).locale('pt-br').format('LT[h]')}</p>
-                                        </div>
-                                    </article>
-                                </li>
-                            ))}
+                        {employees.map(employee => (
+                            <li key={employee.id}>
+                                <article className="second">
+                                    <div className="item4">
+                                        <p>{employee.name} </p>
+                                    </div>
+                                    <div className="item5">
+                                        <p>{moment(employee.time_registered).format('DD/MM/YY')}</p>
+                                    </div>
+                                    <div className="item6">
+                                        <p>{moment(employee.time_registered).locale('pt-br').format('LT[h]')}</p>
+                                    </div>
+                                </article>
+                            </li>
+                        ))}
                     </ul>
                 </form>
             </main>

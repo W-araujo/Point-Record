@@ -1,42 +1,33 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import Logo from '../../assets/logo.png'
 import api from '../../api/api'
-
 import './styles.css'
 
-import Logo from '../../assets/logo.png'
-
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-
 export default function Logon() {
-
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-
-    const history = useHistory();
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+    const history = useHistory()
 
     async function handleLogin(e) {
-        e.preventDefault();
+        e.preventDefault()
         try {
-            const res = await api.post('user/session', { email, password });
+            const res = await api.post('user/session', { email, password })
 
             localStorage.setItem('name', res.data.user.name)
             localStorage.setItem('id', res.data.user.id)
             localStorage.setItem('token', res.data.token)
 
-
             if (res.data.user.role === 'emp') {
-                history.push('/registered_time/get_list');
+                history.push('/registered_time/list/unique')
             } else if (res.data.user.role === 'adm') {
-                history.push('/registered_time/list_all');
+                history.push('/registered_time/list/all')
             } else {
-                alert('Authentication failure');
+                alert('Authentication failure')
             }
-
-
         } catch (err) {
-            alert('Authentication failure');
+            alert('Authentication failure')
         }
     }
 
@@ -47,7 +38,7 @@ export default function Logon() {
                     <div className="col">
                         <div className="row">
                             <div className="col row justify-content-center">
-                                <img class="img-fluid" src={Logo} alt="" />
+                                <img className="img-fluid" src={Logo} alt="" />
                             </div>
                         </div>
                         <div className="row">

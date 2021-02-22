@@ -15,7 +15,7 @@ const tokenGenerator = (user) => {
     )
 }
 
-const decode = (token) => { 
+const decode = (token) => {
     return JWT.verify(token, jwtKey)
 }
 

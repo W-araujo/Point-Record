@@ -1,37 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-
-import api from '../../api/api'
-
 import Logo from '../../assets/logo.png'
 import Dashboard from '../../assets/vector1.png'
 import Register from '../../assets/register.png'
 import Exit from '../../assets/exit.png'
-
+import api from '../../api/api'
 import moment from 'moment'
 import 'moment/locale/pt-br'
-
 import './styles.css'
 
 
 export default function ProfileADM() {
-    
     const [administrators, setEmproyess] = useState([])
-
     const history = useHistory()
-
     const token = localStorage.getItem('token')
 
     useEffect(() => {
-        api.get('/registered_time/list_all', { headers: { token: token } }).then(res => {
-            setEmproyess(res.data);
+        api.get('/registered_time/list/all', { headers: { token: token } }).then(res => {
+            setEmproyess(res.data)
         })
-    });
-
+    })
 
     function logout() {
-        localStorage.clear();
-        history.push('/');
+        localStorage.clear()
+        history.push('/')
     }
 
     return (
@@ -47,7 +39,7 @@ export default function ProfileADM() {
                     </li>
                     <hr style={{ marginRight: 25 }} />
                     <li>
-                        <Link to="/registered_time/list_all">
+                        <Link to="/registered_time/list/all">
                             <img src={Dashboard} style={{ marginLeft: 7, color: '#A5A5A5' }} width="45" height="45" alt="" />
                             <h6 style={{ color: '#A5A5A5', marginTop: 10 }}>Dashboard</h6>
                         </Link>
@@ -65,46 +57,38 @@ export default function ProfileADM() {
                     </Link>
                 </ul>
             </nav>
-
             <main>
                 <article className="first">
-                    <div class="item1">
+                    <div className="item1">
                         <h3>Colaborador</h3>
                     </div>
-                    <div class="item2">
+                    <div className="item2">
                         <h3>Data</h3>
                     </div>
-                    <div class="item3">
+                    <div className="item3">
                         <h3>Hora</h3>
                     </div>
                 </article>
-
                 <form>
                     <ul>
                         {administrators.map(adm => (
                             <li key={adm.id}>
-                                <article class="second">
-                                    <div class="item4">
+                                <article className="second">
+                                    <div className="item4">
                                         <p>{adm.name} </p>
                                     </div>
-                                    <div class="item5">
+                                    <div className="item5">
                                         <p>{moment(adm.time_registered).format('DD/MM/YY')}</p>
                                     </div>
-                                    <div class="item6">
+                                    <div className="item6">
                                         <p>{moment(adm.time_registered).locale('pt-br').format('LT[h]')}</p>
                                     </div>
                                 </article>
                             </li>
                         ))}
                     </ul>
-
-
                 </form>
-
-
             </main>
-
-
         </div>
     )
 }

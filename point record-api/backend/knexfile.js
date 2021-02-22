@@ -3,7 +3,6 @@ require('dotenv').config()
 const { DB_CLIENT, DB_HOST, DB_USER, DB_PASS, DB_NAME } = process.env
 
 module.exports = {
-
   development: {
     client: DB_CLIENT,
     connection: {
