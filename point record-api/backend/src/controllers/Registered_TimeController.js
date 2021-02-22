@@ -1,15 +1,12 @@
 const Registered_TimeService = require("../services/Registered_TimeService")
 
 class Registered_TimeController {
-
     async register(req, res) {
         try {
             if (req.user.role != "emp") {
                 return res.status(403).json({ message: "Unauthorizad" })
             }
-
             await Registered_TimeService.register(req.body, req.user.id)
-
             return res.status(200).json({ message: "Registered successfully" })
         } catch (error) {
             console.log(error)
@@ -42,7 +39,6 @@ class Registered_TimeController {
             return res.status(403).json({ message: "Something went wrong" })
         }
     }
-
 }
 
 module.exports = new Registered_TimeController()

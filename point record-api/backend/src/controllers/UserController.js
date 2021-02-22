@@ -1,7 +1,6 @@
 const UserService = require("../services/UserService")
 
 class UserController {
-
     async create(req, res) {
         try {
             await UserService.create(req.body)
@@ -21,7 +20,6 @@ class UserController {
             return res.status(401).json({ message: "Authentication failure" })
         }
     }
-
 }
 
 module.exports = new UserController()

@@ -5,7 +5,6 @@ const knex = require("knex")(development)
 const BaseModel = require("./Base")
 
 class User extends BaseModel {
-
     constructor() {
         super('user')
     }
@@ -22,7 +21,6 @@ class User extends BaseModel {
         }
         return user
     }
-    
 }
 
 module.exports = new User()
