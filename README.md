@@ -30,6 +30,9 @@
 <h1> ➡ Contents </h1>
 <ul>
     <li>
+    <a href="#technologies">Technologies</a>
+    </li>
+    <li>
      <a href="#features">Features</a>
     </li>
     <li>
@@ -39,6 +42,24 @@
      <a href="#getting-started">Getting Started</a>
     </li>
 </ul>
+
+<h1 href="#technologies">⬇ Technologies</h1>
+
+<h4>Back-end</h4>
+<ul>
+  <li>Node.js</li>
+  <li>Express</li>
+  <li>knex</li>
+  <li>dotEnv</li>
+  <li>JWT</li>
+  <li>MD5</li>
+  </ul>
+  
+  <h4>Front-end</h4>
+<ul>
+  <li>React.js</li>
+  <li>Reactstrap</li>
+  </ul>
 
 <h1 href="#features">⬇ Features</h1>
    <ul>
