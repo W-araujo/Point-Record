@@ -24,6 +24,9 @@
 
 </p>
 
+     
+<h2>Documentação (rotas) - <a href="https://documenter.getpostman.com/view/12541520/TWDXpxVf">Link</a></h2>
+
 <h1> ➡ Contents </h1>
 <ul>
     <li>
@@ -89,8 +92,6 @@
            <code>yarn start</code>
         </li>
    </ul>
-     
-
 
     
  
