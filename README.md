@@ -93,7 +93,7 @@
             Fill in all fields according to your database
         </li>
            <li>
-            Run this code to create create the database tables
+            Run this code to create the database tables
             <code>npx knex migrate:latest</code>
         </li>
         <li>
